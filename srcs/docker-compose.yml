@@ -2,7 +2,6 @@ version: '3'
 
 services:
   mariadb:
-    image: mariadb
     container_name: mariadb
     build:
       context: ./requirements/mariadb
@@ -13,7 +12,7 @@ services:
       - "3306"
     networks:
       - inception
-    restart: unless-stopped
+    restart: always
     env_file: .env
     healthcheck:
       test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
@@ -23,7 +22,6 @@ services:
       start_period: 5s
 
   wordpress:
-    image: wordpress
     container_name: wordpress
     build:
       context: ./requirements/wordpress
@@ -34,14 +32,13 @@ services:
       - "9000"
     networks:
       - inception
-    restart: unless-stopped
+    restart: always
     env_file: .env
     depends_on:
       mariadb:
         condition: service_healthy    
 
   nginx:
-    image: nginx
     container_name: nginx
     build:
       context: ./requirements/nginx
@@ -54,7 +51,7 @@ services:
       - "443:443"
     networks:
       - inception
-    restart: unless-stopped
+    restart: always
     env_file: .env
     healthcheck:
       test: 'curl -kfsSL https://localhost:443/status'

@@ -20,4 +20,4 @@ fclean: clean
 
 re: fclean all
 
-.Phony: all logs clean fclean
+.PHONY: all logs clean fclean

@@ -19,6 +19,7 @@ RUN cd /var/www/html \
 RUN chown -R www-data:www-data /var/www/*
 RUN chmod -R 755 /var/www/*
 
+# Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
 COPY ./tools/wpscript.sh ./
@@ -26,4 +27,4 @@ RUN chmod +x ./wpscript.sh
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-ENTRYPOINT ["bash", "./wpscript.sh"]
+ENTRYPOINT ["bash", "./init_launch_wp.sh"]

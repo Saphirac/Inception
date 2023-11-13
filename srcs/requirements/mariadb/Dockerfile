@@ -20,4 +20,4 @@ EXPOSE 3306
 COPY ./tools/dbscript.sh ./
 RUN chmod +x ./dbscript.sh
 
-ENTRYPOINT ["bash", "./dbscript.sh"]
+ENTRYPOINT ["bash", "./init_launch_db.sh"]
