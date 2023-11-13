@@ -6,7 +6,7 @@ RUN apt-get install -y mariadb-server
 RUN apt-get install -y mariadb-client
 RUN apt-get install -y procps
 
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf/mariadb.conf /etc/my.cnf.d
 
 RUN mkdir -p /var/run/mysqld
 RUN mkdir -p /var/lib/mysql
@@ -17,7 +17,7 @@ RUN chmod -R 755 /var/lib/mysql/
 
 EXPOSE 3306
 
-COPY ./tools/dbscript.sh ./
-RUN chmod +x ./dbscript.sh
+COPY ./tools/init_launch_db.sh /tmp
+RUN chmod +x /tmp/init_launch_db.sh
 
-ENTRYPOINT ["bash", "./init_launch_db.sh"]
+ENTRYPOINT ["bash", "/tmp/init_launch_db.sh"]

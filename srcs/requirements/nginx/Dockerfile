@@ -11,8 +11,8 @@ RUN chmod 755 /var/www/html && \
     chown -R www-data:www-data /var/www/html
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY init-script.sh /tmp/init-script.sh
-RUN chmod +x /tmp/init-script.sh
+COPY ./init_launch_ng.sh /tmp
+RUN chmod +x /tmp/init_launch_ng.sh
 
-ENTRYPOINT ["sh", "./init_launch_ng.sh"]
+ENTRYPOINT ["sh", "/tmp/init_launch_ng.sh"]
 
