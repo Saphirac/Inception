@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
-
 # generate a self-signed SSL certificate for secure server communication
 openssl req -x509 -nodes -newkey rsa:4096 \
         -keyout /etc/ssl/private/selfsigned-ssl.key \

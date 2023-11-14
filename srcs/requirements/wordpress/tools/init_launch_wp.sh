@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
-
 cd /var/www/html/wordpress
 
 # Check if WordPress is already installed
