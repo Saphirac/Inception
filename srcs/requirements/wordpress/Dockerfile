@@ -27,4 +27,4 @@ RUN chmod +x ./init_launch_wp.sh
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-ENTRYPOINT ["bash", "./init_launch_wp.sh"]
+ENTRYPOINT ["sh", "./init_launch_wp.sh"]
