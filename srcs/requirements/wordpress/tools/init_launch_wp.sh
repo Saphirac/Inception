@@ -3,7 +3,7 @@
 cd /var/www/html/wordpress
 
 # Check if WordPress is already installed
-if ! wp core is-installed --allow-root; then
+if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
     # Create WordPress configuration
     wp config create --allow-root --dbname="${SQL_DATABASE}" \
                      --dbuser="${SQL_USER}" \
@@ -27,16 +27,19 @@ if ! wp core is-installed --allow-root; then
     # Flush WordPress cache
     wp cache flush --allow-root
 
+    wp core update --allow-root
+
     wp plugin install contact-form-7 --activate --allow-root
 
     wp language core install en_US --activate --allow-root
 
     # Delete default themes and plugins
-    wp theme delete twentynineteen twentytwenty --allow-root
     wp plugin delete hello --allow-root
 
     # Set WordPress permalink structure
     wp rewrite structure '/%postname%/' --allow-root
+
+    mv /tmp/sources/cv.html /var/www/html/wordpress
 fi
 
 # Check if the PHP run directory exists, create if not
@@ -44,5 +47,5 @@ if [ ! -d /run/php ]; then
     mkdir /run/php;
 fi
 
-exec /usr/sbin/php-fpm7.3 -F -R
+exec /usr/sbin/php-fpm7.4 -F -R
 echo "PHP-FPM launching successfully! "
