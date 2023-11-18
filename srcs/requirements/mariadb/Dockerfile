@@ -17,7 +17,7 @@ RUN chown mysql:mysql /var/lib/mysql/ \
 
 EXPOSE 3306
 
-COPY ./tools/init_launch_db_test.sh /tmp
-RUN chmod +x /tmp/init_launch_db_test.sh
+COPY ./tools/init_launch_db.sh /tmp
+RUN chmod +x /tmp/init_launch_db.sh
 
-ENTRYPOINT ["sh", "/tmp/init_launch_db_test.sh"]
+ENTRYPOINT ["sh", "/tmp/init_launch_db.sh"]
