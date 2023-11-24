@@ -27,7 +27,7 @@ if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
     # Flush WordPress cache
     wp cache flush --allow-root
 
-    wp core update --allow-root
+    #wp core update --allow-root
 
     wp plugin install contact-form-7 --activate --allow-root
 
@@ -35,9 +35,13 @@ if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
 
     # Delete default themes and plugins
     wp plugin delete hello --allow-root
+    wp theme install twentytwenty \
+        --activate \
+        --allow-root \
+        --path=/var/www/html/wordpress
 
-    # Set WordPress permalink structure
-    wp rewrite structure '/%postname%/' --allow-root
+    wp rewrite structure '' --hard --allow-root
+    wp rewrite flush --hard --allow-root
 
     mv /tmp/sources/cv.html /var/www/html/wordpress
 fi
